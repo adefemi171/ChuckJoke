@@ -1,6 +1,11 @@
 import React from "react";
 import { gql, useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Typography from '@material-ui/core/Typography';
+import { ThemeProvider } from "@material-ui/styles";
+import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
 
 const GET_JOKE = gql`
   query getRandomJoke($category: String!) {
@@ -12,28 +17,26 @@ const GET_JOKE = gql`
 `;
 
 function Jokes() {
+  let theme = createMuiTheme();
+  theme = responsiveFontSizes(theme);
   const params = useParams();
 
   const { loading, error, data } = useQuery(GET_JOKE, {
     variables: { category: params.categoryName },
   });
 
-  if (loading) return "Loading...";
+  if (loading) return <CircularProgress />;
   if (error) return `Error! ${error.message}`;
 
   return (
-    <div>
-      <h1>{params.categoryName}</h1>
+    <Container component="main" maxWidth="xs">
+      <ThemeProvider theme={theme}>
+      <Typography variant="h4">{params.categoryName}</Typography>
       <div>{data.getRandomJoke.value}</div>
-    </div>
+      </ThemeProvider>
+    </Container>
   );
 }
-// const jokes = props => {
-//     return (
-//         <div>
 
-//         </div>
-//     )
-// }
 
 export default Jokes;

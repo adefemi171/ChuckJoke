@@ -2,7 +2,7 @@ import { gql, useQuery } from "@apollo/client";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import React from "react";
 import {useHistory} from 'react-router-dom'
-import Category from "../components/category";
+
 
 const query = gql`
   query {
@@ -16,7 +16,7 @@ const Categories = (props) => {
   const { data, loading, error } = useQuery(query);
 
   const history = useHistory()
-  if (loading) return <h1>Loading</h1>;
+  if (loading) return <CircularProgress />;
   if (error) return <h1>Error</h1>;
 
   return (
