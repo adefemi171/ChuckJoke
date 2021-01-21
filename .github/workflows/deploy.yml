@@ -28,13 +28,13 @@ jobs:
         key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
     - name: Install dependencies and clean install
-      run: yarn install
+      run: npm install
 
     - name: REBUILD NODE SASS
-      run: yarn rebuild node-sass
+      run: npm rebuild node-sass
 
     - name: Build
-      run: yarn run build 
+      run: npm run build 
 
     - name: Publish to netlify
       uses: netlify/actions/cli@master
