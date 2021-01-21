@@ -2,7 +2,7 @@ name: Roatech-NETLIFY-DEPLOY
 
 on:
   push:
-    branches: [ master ]
+    branches: [ Master ]
 
 jobs:
   publish:
